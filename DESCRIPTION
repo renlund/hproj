@@ -1,0 +1,19 @@
+Package: hproj
+Title: henrik style project template
+Version: 0.0.1.9001
+Author: Henrik Renlund <henrikrenlund@gmail.com>
+Maintainer: Henrik Renlund <henrikrenlund@gmail.com>
+Description: Tools for working with projects set up according to the arbitrary
+    preferences of the author. Directory structure for saving, attaching, etc.
+Depends:
+    R (>= 3.1.0),
+    knitr (>= 1.11)
+Suggests:
+    Hmisc,
+    testthat,
+    devtools,
+    rmarkdown
+License: GPL-3
+LazyData: true
+VignetteBuilder: knitr
+RoxygenNote: 7.1.2

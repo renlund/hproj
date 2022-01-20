@@ -1,6 +1,6 @@
-#' @title Print loop info
-#' @description Prints progress
-#' @param i loopin index (\code{i in 1:n})
+#' @title print loop info
+#' @description Print progress in loop
+#' @param i loopin index
 #' @param n length of looping index
 #' @param len number of times to get progress information
 #' @param prefix printing prefix

@@ -15,7 +15,12 @@ keep_object(name)
 \item{name}{character vector; the name of one or more variable}
 }
 \description{
-Save object(s) to 'calc' folder
+Save object(s) to 'calc' folder. Retrieve later with
+    \code{fetch}
+}
+\details{
+Some meta-data on objects saved in stored in 'calc/.meta'. That
+    information can be retrieved with \code{fetch()}.
 }
 \section{Functions}{
 \itemize{

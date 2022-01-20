@@ -2,7 +2,7 @@
 % Please edit documentation in R/rm2.R
 \name{rm2}
 \alias{rm2}
-\title{remove2}
+\title{remove all but}
 \usage{
 rm2(..., rmlist = NULL, envir = .GlobalEnv, verbose = TRUE)
 }
@@ -16,8 +16,5 @@ rm2(..., rmlist = NULL, envir = .GlobalEnv, verbose = TRUE)
 \item{verbose}{give helful messages?}
 }
 \description{
-remove all but
-}
-\details{
 like \code{rm} but specify what you want to keep
 }

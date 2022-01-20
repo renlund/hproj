@@ -1,5 +1,5 @@
 ##' @title latex code to include graphics
-##' @description generate standard LaTeX code for including graphics
+##' @description Generate standard LaTeX code for including graphics
 ##' @param file path to file to include
 ##' @param caption caption
 ##' @param label label

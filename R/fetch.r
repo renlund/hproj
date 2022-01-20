@@ -1,5 +1,7 @@
 #' @title load
-#' @description load an object from 'calc' directory
+#' @description Load an object from 'calc' directory. Use \code{fetch()} to see
+#'     what objects are available. Objects stored with \code{keep} will also
+#'     have meta-data recorded in 'calc/.meta'.
 #' @param ... (unquoted) names of objects
 #' @export
 fetch <- function(..., overwrite=TRUE, message=FALSE,
@@ -56,7 +58,7 @@ fetch_object <- function(name = NULL, overwrite=FALSE, message=FALSE,
 ##'     beginning with '.'
 ##' @export
 fetch_dots <- function(){
-    s <- hproj:::whatsaved()
+    s <- whatsaved()
     d <- s[grepl("^\\.", s)]
     fetch_object(name = d)
 }

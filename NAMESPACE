@@ -3,7 +3,7 @@
 export(cess)
 export(cess_dm)
 export(chunks_info)
-export(clean)
+export(clean_tex)
 export(cmp)
 export(cmp_rnw)
 export(dm_)

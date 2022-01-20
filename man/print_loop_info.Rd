@@ -2,12 +2,12 @@
 % Please edit documentation in R/print_loop_info.r
 \name{print_loop_info}
 \alias{print_loop_info}
-\title{Print loop info}
+\title{print loop info}
 \usage{
 print_loop_info(i, n, len = 10, prefix = "", suffix = "")
 }
 \arguments{
-\item{i}{loopin index (\code{i in 1:n})}
+\item{i}{loopin index}
 
 \item{n}{length of looping index}
 
@@ -18,7 +18,7 @@ print_loop_info(i, n, len = 10, prefix = "", suffix = "")
 \item{suffix}{printing suffix}
 }
 \description{
-Prints progress
+Print progress in loop
 }
 \examples{
 n <- 1E3

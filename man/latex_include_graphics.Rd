@@ -27,5 +27,5 @@ latex_include_graphics(
 \item{cat}{if TRUE (default) code will be cat:ed}
 }
 \description{
-generate standard LaTeX code for including graphics
+Generate standard LaTeX code for including graphics
 }

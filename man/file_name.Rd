@@ -2,7 +2,7 @@
 % Please edit documentation in R/file_name.r
 \name{file_name}
 \alias{file_name}
-\title{Decompose filename}
+\title{decompose filename}
 \usage{
 file_name(filename)
 }
@@ -17,5 +17,5 @@ Decompose a filename into name and extension
 }
 \examples{
 some_names <- c("foo.txt", "foo.bar.r", ".emacs", "DESCRIPTION")
-fileName(some_names)
+file_name(some_names)
 }

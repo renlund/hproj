@@ -13,8 +13,8 @@ cmp_dm()
 cmp_rnw(input, output, ...)
 }
 \arguments{
-\item{dm}{logical; if TRUE choose dm-source. If NULL the hproj option
-'dm_active' is chosen}
+\item{dm}{logical; if TRUE choose dm-source. If NULL 'dm' is set to the
+hproj option 'dm_active'.}
 
 \item{...}{arguments passed to \code{\link[knitr]{knit2pdf}}}
 
@@ -23,7 +23,8 @@ cmp_rnw(input, output, ...)
 \item{output}{output tex file}
 }
 \description{
-compile source or dm-source
+Compile source or dm-source. Leave arguments empty to let
+    \code{cmp} figure out which one you want.
 }
 \section{Functions}{
 \itemize{

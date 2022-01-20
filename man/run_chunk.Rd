@@ -6,7 +6,7 @@
 \alias{rblock_dm}
 \alias{cess}
 \alias{cess_dm}
-\title{Run chunks}
+\title{run chunks}
 \usage{
 run_chunk(
   chunk = NULL,

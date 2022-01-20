@@ -17,14 +17,14 @@ send_function(output_file, version, source_file, git)
 
 \item{dm}{logical; send the dm? If NULL DM status will be checked}
 
-\item{output_file}{the rapport pdf}
+\item{output_file}{the report pdf}
 
 \item{version}{version number}
 
-\item{source_file}{the rapport rnw}
+\item{source_file}{the report rnw}
 }
 \description{
-date and (possibly) version stamp a rapport and place in 'sent' folder
+date and (possibly) version stamp a report and place in 'sent' folder
 }
 \section{Functions}{
 \itemize{

@@ -2,7 +2,7 @@
 % Please edit documentation in R/new_project.r
 \name{new_project}
 \alias{new_project}
-\title{Create new project}
+\title{create new project}
 \usage{
 new_project(
   name = "new_project",
@@ -45,19 +45,18 @@ This function sets up a project directory structure along with
 }
 \details{
 This function sets up a folder with subfolders \itemize{
-    \item{cache: this is only used by knitr}
+    \item{cache: this is used by knitr}
 
 \item{calc: this is for storage of .rdat files; 'keep' saves to here; 'fetch'
   loads from here}
 
 \item{figure: for plots (also used by knitr)}
 
-\item{misc-docs: typically this is were I put files given by clients}
+\item{misc-docs: for all those miscellaneous documents that do not fit anywhere}
 
 \item{sent: this is were I store things sent to client. The function
-  \code{send} will attach the current date to the pdf version of the report
-  and put it in this directory. Optionally, \code{send} can zip the report
-  along with the graphs and tables from their respective directory}
+  \code{send} will attach the current date (and version number, if
+  applicable) to the pdf version of the report and put it in this directory.}
 
 \item{table: for (human readable) tabulated data}
 }
@@ -65,12 +64,13 @@ This function sets up a folder with subfolders \itemize{
 and creates (some of them optionally), the files
 \itemize{
 
-\item{source file: the report file}
+\item{a source file (for the report) - it's name will be derived from the
+project folder name.}
 
-\item{dm file: for those projects where the data management is more intricate
+\item{a dm file: for those projects where the data management is more intricate
   and it is better to keep analyses separate from dm}
 
-\item{.Rprofile which will load and point hproj to the source file}
+\item{.Rprofile which will load and point hproj to the source file(s)}
 
 \item{'references.bib': a template for bibTeX references}
 
@@ -81,4 +81,10 @@ and creates (some of them optionally), the files
 
 \item{.gitignore: a file that git uses to tell which files to ignore}
 }
+
+Note also that an org-file can be created (for user of org-mode), but I've
+realized I do not want org-files in each project - so I don't use this
+feature.
+
+Also, this function can setup 'checkpoint' for reproducibility.
 }

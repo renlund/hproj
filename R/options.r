@@ -125,18 +125,27 @@ hproj_check <- function(){
 
 #' @title hproj options
 #' @description This list tries to mimic the behaviour of opts_chunk from knitr.
-#' Currently these values are maintained with the functions in (the list)
-#' \code{opts_hproj}:
-#' \itemize{
-#' \item source_file - name derived from project name
-#' \item output_file - will be like source_file but appropriate file extension (
-#' unless set manually)
-#' \item version a version number as character, e.g. "Version 1". This will
-#'     appear on the LaTeX version of the report
-#' \item version_latex this is the string that will determine how the version
+#'     Currently these values are maintained with the functions in (the list)
+#'     \code{opts_hproj}: \itemize{
+#'
+#' \item{source_file - name derived from project name}
+#'
+#' \item{output_file - will be like source_file but appropriate file extension
+#' (unless set manually)}
+#'
+#' \item{version a version number as character, e.g. "Version 1". This will
+#'     appear on the LaTeX version of the report}
+#'
+#' \item{version_latex this is the string that will determine how the version
 #'     number appears in the title (in LaTeX produced pdf:s) and will be added
-#'     automatically
-#' \item all above options also exists in a version with prefix \code{dm_}
+#'     automatically}
+#'
+#' \item{all above options also exists in a version with prefix \code{dm_}}
+#'
+#' \item{dm_active, this will indicate what file to point to (when a
+#' dm-file is present) for functions \code{cmp}, \code{doc_struc}, \code{look},
+#' \code{send}. This can also be toggled with \code{dm_on()} and \code{dm_off()}}
+#'
 #' }
 #' @export
 opts_hproj <- list(
@@ -182,8 +191,15 @@ dm_ <- function(value = NULL){
 force_dm_status <- function(mess = NULL){
     dm <- hproj_get("dm_active")
     if(is.null(dm)){
-        txt <- paste0("Enter 'y' to set DM status (option 'dm_active') ",
-                      "to TRUE\n(else FALSE)\n                  ")
+        txt <- paste0(
+            "   +----------------------------------------------+\n",
+            "   | DM status has not been set for this session. |\n",
+            "   | There are different ways to do this:         |\n",
+            "   |  * opts_hproj$set(dm_active = <T or F>)      |\n",
+            "   |  * dm_on() or dm_off()                       |\n",
+            "   | Enter 'y' to set to TRUE (else FALSE)        |\n",
+            "   +----------------------------------------------+\n"
+        )
         s <- paste0(mess, "\n", txt)
         if(readline(prompt = s) == "y"){
             hproj_set("dm_active" = TRUE, check = FALSE)

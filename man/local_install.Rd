@@ -2,7 +2,7 @@
 % Please edit documentation in R/local_install.r
 \name{local_install}
 \alias{local_install}
-\title{Install a local package}
+\title{install a local package}
 \usage{
 local_install(path)
 }
@@ -10,6 +10,6 @@ local_install(path)
 \item{path}{path to local package}
 }
 \description{
-...because I can NEVER remember what parameter choice I need
-to make to make \code{install.packages} work...
+Because I can NEVER remember what parameter choice I need
+to make to make \code{install.packages} work.
 }

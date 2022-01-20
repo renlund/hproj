@@ -1,7 +1,5 @@
-##' remove all but
-##'
-##' like \code{rm} but specify what you want to keep
-##' @title remove2
+##' @title remove all but
+##' @description like \code{rm} but specify what you want to keep
 ##' @param ... variables you want to keep
 ##' @param rmlist alternatively, the variables you want to keep as a character vector
 ##' @param envir environment in which to find the variables
@@ -36,20 +34,4 @@ rm2 <- function(..., rmlist = NULL, envir = .GlobalEnv, verbose = TRUE){
                        "\nand keeping:\n  ", kp_t))
     }
     invisible(NULL)
-}
-
-
-if(FALSE){
-    foo <- function(...) as.character(unlist(eval(substitute(alist(...)))))
-    foo(u)
-    foo(x,y)
-    x <- 1
-    y <- "a"
-    z <- 3:1
-    rm2(u)
-    rm2(rmlist='u')
-    rm2(x,u)
-    rm2(x,z)
-    rm2(z, verbose = FALSE)
-    rm2(rmlist = c('x', 'z'))
 }

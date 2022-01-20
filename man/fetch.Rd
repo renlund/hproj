@@ -38,7 +38,9 @@ fetch_dots()
 \item{name}{character; the name of a variable. If missing, available objects will be listed}
 }
 \description{
-load an object from 'calc' directory
+Load an object from 'calc' directory. Use \code{fetch()} to see
+    what objects are available. Objects stored with \code{keep} will also
+    have meta-data recorded in 'calc/.meta'.
 }
 \section{Functions}{
 \itemize{

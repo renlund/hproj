@@ -1,10 +1,10 @@
-#' @title Decompose filename
+#' @title decompose filename
 #' @description Decompose a filename into name and extension
 #' @param filename the vector of names you want decomposed
 #' @return A dataframe with variables 'name' and 'extension'
 #' @examples
 #' some_names <- c("foo.txt", "foo.bar.r", ".emacs", "DESCRIPTION")
-#' fileName(some_names)
+#' file_name(some_names)
 #' @export
 file_name <- function(filename){
    ext <- rep(NA_character_, length(filename))

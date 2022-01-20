@@ -2,7 +2,7 @@
 % Please edit documentation in R/kill_cache.r
 \name{kill_cache}
 \alias{kill_cache}
-\title{Kill Cache}
+\title{kill cache}
 \usage{
 kill_cache(
   pattern = NULL,
@@ -13,7 +13,8 @@ kill_cache(
 )
 }
 \arguments{
-\item{pattern}{if not \code{NULL} (default) this can search for cache items to remove}
+\item{pattern}{if not \code{NULL} (default) this can search for cache items
+to remove}
 
 \item{cache}{remove files from sub directory 'cache'? (default: TRUE)}
 
@@ -25,11 +26,11 @@ kill_cache(
 pattern given)}
 }
 \description{
-Remove the contents of subdirectory 'cache', 'figure' and 'table'.
+Remove the contents of subdirectory 'cache' and, optionally,
+    'figure', 'table', and \code{.GlobalEnv}.
 }
 \details{
-Sometimes it is easier clean the cache than to set \code{CACHE = FALSE} globally, since you may have forgotten to specify all dependencies...
-}
-\author{
-Henrik Renlund
+Sometimes it is easier clean the cache than to set \code{CACHE =
+    FALSE} globally, since you may have forgotten to specify all
+    dependencies.
 }

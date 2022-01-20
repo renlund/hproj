@@ -1,4 +1,4 @@
-#' @title Run chunks
+#' @title run chunks
 #' @description Run a chunk in a given document
 #' @param chunk name or number of chunk, if \code{NULL} (default) then the first
 #'     chunk will be executed
@@ -9,29 +9,7 @@
 #' @param verbose if TRUE, may print some slightly unneccessary messages
 #' @export
 run_chunk <- function(chunk = NULL, file = NULL, dm = NULL, envir = .GlobalEnv, verbose = TRUE){
-    ## if file is null then it is determined by dm:
-    if(is.null(file) & is.null(dm)){
-        ## dm <- opts_hproj$get("dm_active")
-        ## if(is.null(dm)){
-        ##     p <- paste0("'file' and 'dm' arguments are NULL and hproj options ",
-        ##                 "'dm_active' is not set.\n",
-        ##                 "If 'Y' (or 'y') this option will be set to TRUE.\n",
-        ##                 "Are you working on the DM file?\n",
-        ##                 "                                  ")
-        ##     if(readline(prompt = p) %in% c("Y", "y")){
-        ##         opts_hproj$set(dm_active = TRUE)
-        ##     } else {
-        ##         opts_hproj$set(dm_active = FALSE)
-        ##     }
-        ##     dm <- opts_hproj$get("dm_active")
-        ## }
-        s <- "DM status is unclear"
-        dm <- force_dm_status(s)
-    }
-    if(is.null(file)){
-        what_file <- paste0(if(dm) "dm_" else NULL, "source_file")
-        file = opts_hproj$get(what_file)
-    }
+    if(is.null(file)) file = holy_get("source_file", dm = dm)
     cinfo <- chunks_info(file, all = TRUE)
     if(is.null(chunk)) chunk <- 1
     if(is.numeric(chunk)){
@@ -84,12 +62,3 @@ cess <- run_chunk
 ##'     \code{rblock_dm}
 ##' @export
 cess_dm <- rblock_dm
-
-if(FALSE){
-   file <- "C:/R/P_package/hproj/ignorera_detta/chunk_tester.rnw"
-   cess(file=file)
-   chunk = c("auto", "B", "2")
-   cess(chunk, file)
-   chunk = c("auto", "B", "2", "ERROR", "do not compute")
-   cess(chunk, file)
-}

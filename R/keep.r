@@ -1,5 +1,8 @@
 #' @title save
-#' @description Save object(s) to 'calc' folder
+#' @description Save object(s) to 'calc' folder. Retrieve later with
+#'     \code{fetch}
+#' @details Some meta-data on objects saved in stored in 'calc/.meta'. That
+#'     information can be retrieved with \code{fetch()}.
 #' @param ... unquoted names of objects
 #' @export
 keep <- function(...){

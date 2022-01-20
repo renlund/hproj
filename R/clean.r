@@ -1,8 +1,10 @@
-#' @title Clean LaTeX files
-#' @description Remove unnecessary LaTeX files
-#' @details Sometimes LaTeX leaves a mess...
+#' @title clean LaTeX files
+#' @description Remove unnecessary LaTeX files. Prompt will be given before
+#'     erasing.
+#' @details Sometimes LaTeX leaves a mess. View source code to see what file
+#'     endings are matched for removal.
 #' @export
-clean <- function(){
+clean_tex <- function(){
    removables <- c(
       #".tex",
       "\\.toc",

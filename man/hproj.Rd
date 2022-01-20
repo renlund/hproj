@@ -10,5 +10,5 @@ This is a package for working with projects - which here means creating a
 functions to create a certain directory structure and other very specific
 things. Note; these are tailored after the idiosyncratic preferences of the
 author. If for some strange reason you are interested, read the documentation
-for \code{newProject} to get some idea.
+for \code{new_project} to get some idea.
 }

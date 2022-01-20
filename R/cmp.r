@@ -1,7 +1,8 @@
 ##' @title compile main rnw file
-##' @description compile source or dm-source
-##' @param dm logical; if TRUE choose dm-source. If NULL the hproj option
-##'     'dm_active' is chosen
+##' @description Compile source or dm-source. Leave arguments empty to let
+##'     \code{cmp} figure out which one you want.
+##' @param dm logical; if TRUE choose dm-source. If NULL 'dm' is set to the
+##'     hproj option 'dm_active'.
 ##' @param ... arguments passed to \code{\link[knitr]{knit2pdf}}
 ##' @export
 cmp <- function(dm = NULL, ...){
@@ -10,14 +11,8 @@ cmp <- function(dm = NULL, ...){
         dm <- force_dm_status(s)
     }
     opts_hproj$check()
-    if(dm){
-        input <- opts_hproj$get("dm_source_file")
-        output <- opts_hproj$get("dm_output_file")
-    } else {
-        input <- opts_hproj$get("source_file")
-        output <- opts_hproj$get("output_file")
-    }
-    cmp_rnw(input = input, output = output, ...)
+    cmp_rnw(input = holy_get("source_file", dm = dm),
+            output = holy_get("output_file", dm = dm), ...)
 }
 
 ##' @describeIn cmp shorthand for \code{cmp(dm=TRUE)}

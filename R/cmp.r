@@ -6,10 +6,6 @@
 ##' @param ... arguments passed to \code{\link[knitr]{knit2pdf}}
 ##' @export
 cmp <- function(dm = NULL, ...){
-    if(is.null(dm)){
-        s <- paste0("DM status is unclear.")
-        dm <- force_dm_status(s)
-    }
     opts_hproj$check()
     cmp_rnw(input = holy_get("source_file", dm = dm),
             output = holy_get("output_file", dm = dm), ...)

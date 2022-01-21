@@ -30,6 +30,7 @@ hproj_set <- function(..., check = TRUE){
    if(length(ls(envir=la_milieu))==0) hproj_restore()
    dots <- list(...)
    value <- get("value", la_milieu)
+   ## why do I not allow new options?:
    for(k in names(dots)) if(!(k %in% value)) dots[[k]] <- NULL
    current <- hproj_get()
    for(k in names(dots)) current[[k]] <- dots[[k]]
@@ -188,20 +189,20 @@ dm_ <- function(value = NULL){
     }
 }
 
-force_dm_status <- function(mess = NULL){
+force_dm_status <- function(){
     dm <- hproj_get("dm_active")
     if(is.null(dm)){
         txt <- paste0(
             "   +----------------------------------------------+\n",
             "   | DM status has not been set for this session. |\n",
-            "   | There are different ways to do this:         |\n",
+            "   | There are ways to do this in code, e.g.:     |\n",
             "   |  * opts_hproj$set(dm_active = <T or F>)      |\n",
             "   |  * dm_on() or dm_off()                       |\n",
-            "   | Enter 'y' to set to TRUE (else FALSE)        |\n",
+            "   | Enter 'y' to set to TRUE now (else FALSE)    |\n",
             "   +----------------------------------------------+\n"
         )
-        s <- paste0(mess, "\n", txt)
-        if(readline(prompt = s) == "y"){
+        cat(txt)
+        if(readline() == "y"){
             hproj_set("dm_active" = TRUE, check = FALSE)
         } else {
             hproj_set("dm_active" = FALSE, check = FALSE)

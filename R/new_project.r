@@ -176,7 +176,7 @@ new_project <- function(name="new_project", path=NULL, class="ucr",
     }
     if(org) cat(create_org(name, yr_name, yr_mail),
                 file = paste0(name, "-org.org"))
-    if(git) create_git(yr_name, yr_mail, source_file)
+    if(git) create_git(yr_name, yr_mail, source_file, dm_source_file)
     if(go_there){
         setwd(full.path)
         hproj::opts_hproj$set("source_file" = source_file)
@@ -189,7 +189,8 @@ new_project <- function(name="new_project", path=NULL, class="ucr",
 
 ## create_git --------------------
 
-create_git <- function(yr_name = NULL, yr_mail = NULL, source_file){
+create_git <- function(yr_name = NULL, yr_mail = NULL, source_file,
+                       dm_source_file = NULL){
   cat(create_git_ignore(), file=".gitignore")
   system("git init")
   cat(paste(rep("-", 65),collapse=""), "\n")
@@ -197,7 +198,9 @@ create_git <- function(yr_name = NULL, yr_mail = NULL, source_file){
   system(paste0("git config user.name \"",yr_name,"\""))
   if(is.null(yr_mail)) yr_mail <- readline("Provide email for git\n (e.g. Anaximandros.Janson@foo.bar)     ")
   system(paste0("git config user.email ",yr_mail))
-  system(paste0("git add ", source_file, " references.bib"))
+  system(paste0("git add ", source_file,
+                if(!is.null(dm_source_file)) paste0(" ", dm_source_file) else "",
+                " references.bib"))
   system(paste0("git commit -m \"hproj initialized project ",gsub("-","",Sys.Date()),"\""))
   cat(paste(rep("-", 65),collapse=""), " Done! \n")
 }
@@ -303,7 +306,7 @@ opts_hproj$set(
     dm_active = ", if(DM) "TRUE" else "FALSE", ",
     ", if(DM) "dm_", "source_file = '", source_file,"', ## also in .rprofile
     ", if(DM) "dm_", "output_file = '", output_file,"',
-    ", if(DM) "dm_", "version = 'Version 0.1'
+    ", if(DM) "dm_", "version = 'Version 0.0'
 )
 ## opts_hproj$get() ## view all hproj options
 

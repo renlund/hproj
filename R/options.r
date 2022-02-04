@@ -51,7 +51,10 @@ hproj_restore <- function(check = FALSE){
       dm_output_file = NULL,
       dm_version = NULL,
       dm_version_latex = NULL,
-      dm_active = NULL
+      dm_active = NULL,
+      tab_attach = TRUE, ## test
+      fig_attach = TRUE, ## test
+      fig_dev = "pdf"    ## test
    ), envir=la_milieu)
    assign(x="value", value = names(get(x="defaults", envir=la_milieu)), envir=la_milieu)
    if(check) hproj_check()

@@ -9,11 +9,11 @@
 ##' @export
 latex_incl_graph <- function(file, caption, label, caption.lot = caption,
                                    placement = "htb", cat = TRUE){
-    code <- paste0("\n\\begin{center}\\begin{figure}[", placement, "]\n",
+    code <- paste0("\n\\begin{figure}[", placement, "]\\begin{center}\n",
                    "\\includegraphics{", file, "}\n",
                    "\\caption[", caption.lot, "]{", caption, "}\n",
                    "\\label{", label, "}\n",
-                   "\\end{figure}\\end{center}\n")
+                   "\\end{center}\\end{figure}\n")
     if(cat) cat(code) else code
 }
 

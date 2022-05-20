@@ -130,7 +130,7 @@ get_meta_info <- function(saved_only = TRUE){
     ## R <- R[order(R$object), ]
     if(!is.null(R)){
         cat(paste0("\n## This project has documented information on:",
-                  " #################################"))
+                  " ################################"))
         print(knitr::kable(R, format = "pandoc"))
     } else {
         cat("")

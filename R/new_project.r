@@ -290,6 +290,11 @@ opts_chunk$set(
     warning=FALSE
 )
 
+## DATA TABLE OPTIONS: -------------------------------------
+## options(datatable.print.keys = TRUE)
+## options(datatable.print.topn = 10)
+## options(datatable.print.class = TRUE)
+
 ## KNIT HOOKs: ---------------------------------------------
 ## ## this hook can resolve a common color conflict
 ## knit_hooks$set(document = function(x) {

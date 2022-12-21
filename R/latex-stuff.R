@@ -6,9 +6,18 @@
 ##' @param caption.lot caption for list of tables
 ##' @param placement placement code, defaults to 'htb'
 ##' @param cat if TRUE (default) code will be cat:ed
+##' @param attach length 2 logical (recycled if length 1); shall caption and
+##'     caption.lot get an attachfile pointer to the included file?
 ##' @export
 latex_incl_graph <- function(file, caption, label, caption.lot = caption,
-                                   placement = "htb", cat = TRUE){
+                             placement = "htb", cat = TRUE,
+                             attach = c(F, F)){
+    if(!length(attach) %in% 1:2){
+        stop("argument attach needs to be logical of length 2 (or 1)")
+    }
+    if(length(attach) == 1) attach <- rep(attach, 2)
+    if(attach[1]) caption <- paste0(caption, " \\attachfile{", file,"}")
+    if(attach[2]) caption.lot <- paste0(caption.lot, " \\attachfile{", file,"}")
     code <- paste0("\n\\begin{figure}[", placement, "]\\begin{center}\n",
                    "\\includegraphics{", file, "}\n",
                    "\\caption[", caption.lot, "]{", caption, "}\n",

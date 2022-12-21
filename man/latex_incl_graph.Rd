@@ -10,7 +10,8 @@ latex_incl_graph(
   label,
   caption.lot = caption,
   placement = "htb",
-  cat = TRUE
+  cat = TRUE,
+  attach = c(F, F)
 )
 }
 \arguments{
@@ -25,6 +26,9 @@ latex_incl_graph(
 \item{placement}{placement code, defaults to 'htb'}
 
 \item{cat}{if TRUE (default) code will be cat:ed}
+
+\item{attach}{length 2 logical (recycled if length 1); shall caption and
+caption.lot get an attachfile pointer to the included file?}
 }
 \description{
 Generate standard LaTeX code for including graphics

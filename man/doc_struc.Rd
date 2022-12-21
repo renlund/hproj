@@ -49,10 +49,10 @@ Get information about the structure in a rnw file. Leave empty
 }
 \section{Functions}{
 \itemize{
-\item \code{doc_struc_dm}: shorthand for \code{doc_struc(dm = TRUE)}
+\item \code{doc_struc_dm()}: shorthand for \code{doc_struc(dm = TRUE)}
 
-\item \code{chunks_info}: get information about chunks in a rnw file
+\item \code{chunks_info()}: get information about chunks in a rnw file
 
-\item \code{sections_info}: get information about sections in a rnw file
+\item \code{sections_info()}: get information about sections in a rnw file
+
 }}
-

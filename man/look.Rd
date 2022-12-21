@@ -21,6 +21,6 @@ Leave arguments empty to open the current pdf version of the
 }
 \section{Functions}{
 \itemize{
-\item \code{look_dm}: shorthand for \code{look(dm = TRUE)}
-}}
+\item \code{look_dm()}: shorthand for \code{look(dm = TRUE)}
 
+}}

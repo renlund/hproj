@@ -28,9 +28,9 @@ Compile source or dm-source. Leave arguments empty to let
 }
 \section{Functions}{
 \itemize{
-\item \code{cmp_dm}: shorthand for \code{cmp(dm=TRUE)}
+\item \code{cmp_dm()}: shorthand for \code{cmp(dm=TRUE)}
 
-\item \code{cmp_rnw}: the function that compiles; a wrapper for
+\item \code{cmp_rnw()}: the function that compiles; a wrapper for
 \code{knitr::knit2pdf}
-}}
 
+}}

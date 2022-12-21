@@ -50,14 +50,14 @@ Run a chunk in a given document
 }
 \section{Functions}{
 \itemize{
-\item \code{rblock}: \code{rblock} is an alias for \code{run_chunk}
+\item \code{rblock()}: \code{rblock} is an alias for \code{run_chunk}
 
-\item \code{rblock_dm}: \code{rblock_dm(chunk, ...)} is shorthand for
+\item \code{rblock_dm()}: \code{rblock_dm(chunk, ...)} is shorthand for
 \code{run_chunk(chunk, file = NULL, dm = TRUE, ...)}
 
-\item \code{cess}: \code{cess} is an obsolete alias for \code{run_chunk}
+\item \code{cess()}: \code{cess} is an obsolete alias for \code{run_chunk}
 
-\item \code{cess_dm}: \code{cess_dm} is an obsolete alias for
+\item \code{cess_dm()}: \code{cess_dm} is an obsolete alias for
 \code{rblock_dm}
-}}
 
+}}

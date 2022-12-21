@@ -18,6 +18,6 @@ A wrapper for \code{knitr::opts_current$get()}. Sometimes it is
 }
 \section{Functions}{
 \itemize{
-\item \code{knit_runtime}: check if knitr is running
-}}
+\item \code{knit_runtime()}: check if knitr is running
 
+}}

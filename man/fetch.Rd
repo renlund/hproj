@@ -44,9 +44,9 @@ Load an object from 'calc' directory. Use \code{fetch()} to see
 }
 \section{Functions}{
 \itemize{
-\item \code{fetch_object}: the function that does the work
+\item \code{fetch_object()}: the function that does the work
 
-\item \code{fetch_dots}: a shorthand for loading all variables with variable names
+\item \code{fetch_dots()}: a shorthand for loading all variables with variable names
 beginning with '.'
-}}
 
+}}

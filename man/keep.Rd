@@ -24,6 +24,6 @@ Some meta-data on objects saved in stored in 'calc/.meta'. That
 }
 \section{Functions}{
 \itemize{
-\item \code{keep_object}: the function that does the work
-}}
+\item \code{keep_object()}: the function that does the work
 
+}}

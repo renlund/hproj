@@ -20,8 +20,8 @@ set hproj option 'dm_activate' to TRUE
 }
 \section{Functions}{
 \itemize{
-\item \code{dm_off}: inactivate DM
+\item \code{dm_off()}: inactivate DM
 
-\item \code{dm_}: set activation status for DM
+\item \code{dm_()}: set activation status for DM
+
 }}
-

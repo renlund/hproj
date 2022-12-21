@@ -28,8 +28,8 @@ date and (possibly) version stamp a report and place in 'sent' folder
 }
 \section{Functions}{
 \itemize{
-\item \code{send_dm}: shorthand for \code{send(dm = TRUE)}
+\item \code{send_dm()}: shorthand for \code{send(dm = TRUE)}
 
-\item \code{send_function}: the function that does the work
+\item \code{send_function()}: the function that does the work
+
 }}
-

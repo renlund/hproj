@@ -16,11 +16,11 @@ keep_object(name)
 }
 \description{
 Save object(s) to 'calc' folder. Retrieve later with
-    \code{fetch}
+\code{fetch}
 }
 \details{
 Some meta-data on objects saved in stored in 'calc/.meta'. That
-    information can be retrieved with \code{fetch()}.
+information can be retrieved with \code{fetch()}.
 }
 \section{Functions}{
 \itemize{

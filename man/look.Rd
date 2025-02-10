@@ -16,8 +16,8 @@ look_dm()
 }
 \description{
 Leave arguments empty to open the current pdf version of the
-    report/DM file, or point to any pdf, as this is just a wrapper for
-    \code{shell.exec}
+report/DM file, or point to any pdf, as this is just a wrapper for
+\code{shell.exec}
 }
 \section{Functions}{
 \itemize{

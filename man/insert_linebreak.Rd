@@ -25,7 +25,7 @@ insert linebreaks to a character vector
 }
 \details{
 Given a maximum number of character 'n', insert a linebreak before this number
-    is reached. N.B. Words longer than 'n' will however NOT be abbreviated.
+is reached. N.B. Words longer than 'n' will however NOT be abbreviated.
 }
 \examples{
     s <- paste0("A very long and perhaps supercalifragilisticexpialidocious",

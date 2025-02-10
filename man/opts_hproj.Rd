@@ -12,8 +12,8 @@ opts_hproj
 }
 \description{
 This list tries to mimic the behaviour of opts_chunk from knitr.
-    Currently these values are maintained with the functions in (the list)
-    \code{opts_hproj}: \itemize{
+Currently these values are maintained with the functions in (the list)
+\code{opts_hproj}: \itemize{
 
 \item{source_file - name derived from project name}
 
@@ -21,11 +21,11 @@ This list tries to mimic the behaviour of opts_chunk from knitr.
 (unless set manually)}
 
 \item{version a version number as character, e.g. "Version 1". This will
-    appear on the LaTeX version of the report}
+appear on the LaTeX version of the report}
 
 \item{version_latex this is the string that will determine how the version
-    number appears in the title (in LaTeX produced pdf:s) and will be added
-    automatically}
+number appears in the title (in LaTeX produced pdf:s) and will be added
+automatically}
 
 \item{all above options also exists in a version with prefix \code{dm_}}
 

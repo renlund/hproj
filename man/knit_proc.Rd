@@ -14,7 +14,7 @@ knit_runtime()
 }
 \description{
 A wrapper for \code{knitr::opts_current$get()}. Sometimes it is
-    useful to have access to current chunk options at runtime, e.g. 'label'.
+useful to have access to current chunk options at runtime, e.g. 'label'.
 }
 \section{Functions}{
 \itemize{

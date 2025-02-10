@@ -15,6 +15,6 @@ as chunk option 'dev'.}
 }
 \description{
 A function that will return the caption with the appropriate
-    LaTeX code for attaching, meant for use with knitr:s system for creating
-    figures.
+LaTeX code for attaching, meant for use with knitr:s system for creating
+figures.
 }

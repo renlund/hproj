@@ -2,9 +2,12 @@
 % Please edit documentation in R/attach-stuff.R
 \name{csv_attach}
 \alias{csv_attach}
+\alias{xlsx_attach}
 \title{attach csv}
 \usage{
 csv_attach(cap, tab, file = NULL, dir = "table")
+
+xlsx_attach(cap, tab, file = NULL, dir = "table", ...)
 }
 \arguments{
 \item{cap}{the caption}
@@ -14,10 +17,17 @@ csv_attach(cap, tab, file = NULL, dir = "table")
 \item{file}{name of file; path and extension will be added automatically.}
 
 \item{dir}{subfolder; default 'table'}
+
+\item{...}{args passed to openxlsx::write.xlsx}
 }
 \description{
 A function that (1) writes a csv to file, and (2) returns the
-    caption with the appropriate LaTeX code to attach that file at the end.
-    Currently this function will use \code{write.csv2}, since I find that it
-    readable for everyone (so far).
+caption with the appropriate LaTeX code to attach that file at the end.
+Currently this function will use \code{write.csv2}, since I find that it
+readable for everyone (so far).
 }
+\section{Functions}{
+\itemize{
+\item \code{xlsx_attach()}: xlsx_attach ... (add text here)
+
+}}

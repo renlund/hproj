@@ -41,22 +41,22 @@ created)}
 }
 \description{
 This function sets up a project directory structure along with
-    some files
+some files
 }
 \details{
 This function sets up a folder with subfolders \itemize{
-    \item{cache: this is used by knitr}
+\item{cache: this is used by knitr}
 
 \item{calc: this is for storage of .rdat files; 'keep' saves to here; 'fetch'
-  loads from here}
+loads from here}
 
 \item{figure: for plots (also used by knitr)}
 
 \item{misc-docs: for all those miscellaneous documents that do not fit anywhere}
 
 \item{sent: this is were I store things sent to client. The function
-  \code{send} will attach the current date (and version number, if
-  applicable) to the pdf version of the report and put it in this directory.}
+\code{send} will attach the current date (and version number, if
+applicable) to the pdf version of the report and put it in this directory.}
 
 \item{table: for (human readable) tabulated data}
 }
@@ -68,16 +68,16 @@ and creates (some of them optionally), the files
 project folder name.}
 
 \item{a dm file: for those projects where the data management is more intricate
-  and it is better to keep analyses separate from dm}
+and it is better to keep analyses separate from dm}
 
 \item{.Rprofile which will load and point hproj to the source file(s)}
 
 \item{'references.bib': a template for bibTeX references}
 
 \item{a .rproj file with the project name: this is an RStudio project file,
-  by starting this file RStudio will set the working directory and remember
-  what documents you were looking at. There are settings to be made that can
-  be project specific}
+by starting this file RStudio will set the working directory and remember
+what documents you were looking at. There are settings to be made that can
+be project specific}
 
 \item{.gitignore: a file that git uses to tell which files to ignore}
 }

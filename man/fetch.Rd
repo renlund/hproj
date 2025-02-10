@@ -39,8 +39,8 @@ fetch_dots()
 }
 \description{
 Load an object from 'calc' directory. Use \code{fetch()} to see
-    what objects are available. Objects stored with \code{keep} will also
-    have meta-data recorded in 'calc/.meta'.
+what objects are available. Objects stored with \code{keep} will also
+have meta-data recorded in 'calc/.meta'.
 }
 \section{Functions}{
 \itemize{

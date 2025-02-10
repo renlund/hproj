@@ -8,9 +8,9 @@ latex_clean()
 }
 \description{
 Remove unnecessary LaTeX files. Prompt will be given before
-    erasing.
+erasing.
 }
 \details{
 Sometimes LaTeX leaves a mess. View source code to see what file
-    endings are matched for removal.
+endings are matched for removal.
 }

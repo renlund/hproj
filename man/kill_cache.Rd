@@ -27,10 +27,10 @@ pattern given)}
 }
 \description{
 Remove the contents of subdirectory 'cache' and, optionally,
-    'figure', 'table', and \code{.GlobalEnv}.
+'figure', 'table', and \code{.GlobalEnv}.
 }
 \details{
 Sometimes it is easier clean the cache than to set \code{CACHE =
     FALSE} globally, since you may have forgotten to specify all
-    dependencies.
+dependencies.
 }

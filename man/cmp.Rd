@@ -24,7 +24,7 @@ hproj option 'dm_active'.}
 }
 \description{
 Compile source or dm-source. Leave arguments empty to let
-    \code{cmp} figure out which one you want.
+\code{cmp} figure out which one you want.
 }
 \section{Functions}{
 \itemize{

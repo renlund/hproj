@@ -27,25 +27,25 @@ A print out
 
 A data frame with variables
 \itemize{
-   \item name: name of chunk (if any)
-   \item row: start row
-   \item n.row: number of rows
-   \item stop: end line of chunk
-   \item eval.arg: (if \code{all = TRUE}) if there is an argument specified for \code{eval}
-   \item code:  (if \code{all = TRUE}) the code in the chunk
+\item name: name of chunk (if any)
+\item row: start row
+\item n.row: number of rows
+\item stop: end line of chunk
+\item eval.arg: (if \code{all = TRUE}) if there is an argument specified for \code{eval}
+\item code:  (if \code{all = TRUE}) the code in the chunk
 }
 
 A data frame with variables
 \itemize{
-   \item name: name of section
-   \item row: row number where section starts
-   \item sub: number of 'sub', i.e. 0 for section, 1 for subsection,
-   and 2 for subsubsection
+\item name: name of section
+\item row: row number where section starts
+\item sub: number of 'sub', i.e. 0 for section, 1 for subsection,
+and 2 for subsubsection
 }
 }
 \description{
 Get information about the structure in a rnw file. Leave empty
-    all arguments empty and hproj will try to figure out what you want.
+all arguments empty and hproj will try to figure out what you want.
 }
 \section{Functions}{
 \itemize{

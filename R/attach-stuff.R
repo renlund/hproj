@@ -44,6 +44,33 @@ csv_attach <- function(cap, tab, file = NULL, dir = "table"){
     } else cap
 }
 
+##' @describeIn csv_attach xlsx_attach ... (add text here)
+##' @param ... args passed to openxlsx::write.xlsx
+##' @export
+xlsx_attach <- function(cap, tab, file = NULL, dir = "table", ...){
+    if(is.null(file) & knit_runtime()){
+        file = file.path(dir, paste0(knit_proc("label"), ".xlsx"))
+    } else if(is.null(file)){
+        file = file.path(dir, "__PLACEHOLDER__.xlsx")
+        s <- paste0("  |  if 'file' is NULL the knitr label will be used, but you\n",
+                    "  |  are not knitting so '", file,"' is used")
+        message(s)
+    } else {
+        if(!grepl("\\.xlsx$", file)){
+            file = paste0(file, ".xlsx")
+        }
+        file = file.path(dir, file)
+    }
+    message("file written:", file)
+    ## openxlsx::write.xlsx(tab, file = file, asTable = TRUE,
+    ##                      colNames = TRUE)
+    openxlsx::write.xlsx(tab, file = file, ...)
+    if(opts_hproj$get("tab_attach")){
+        paste0(cap, " \\attachfile{", file, "}")
+    } else cap
+}
+## XK there should be a tab_attach ...
+
 ##' @title attach figure
 ##' @description A function that will return the caption with the appropriate
 ##'     LaTeX code for attaching, meant for use with knitr:s system for creating

@@ -56,7 +56,7 @@
 #' @param go_there Set working directory to project directory? (default: FALSE)
 #' @param org should an org file be created?
 #' @export
-new_project <- function(name="new_project", path=NULL, class="ucr",
+new_project <- function(name="new_project", path=NULL, class="article",
                         dm = FALSE, RSproj=TRUE, git=TRUE,
                         checkpoint = FALSE, checkpoint.date = NULL,
                         go_there=FALSE, org = FALSE){
@@ -261,21 +261,13 @@ create_rnw <- function(name, yr_name = NULL, yr_mail = NULL, class,
     ## get latest ref-number from:
     ##      https://github.com/renlund/hproj/commit/master
 }\n",
-"library(hproj)       # https://github.com/renlund/hproj
-## library(datma)       # https://github.com/renlund/datma
-## library(descripteur) # https://github.com/renlund/descripteur
-
-## library(dplyr)
-## library(ggplot2); theme_set(theme_bw())
-## library(tidyr)
-## library(haven)
-
-## library(Hmisc)
-## library(rms)
-## library(data.table)
+"library(knitr)
+library(hproj)       # https://github.com/renlund/hproj
+library(data.table)
 ## library(survival)
-## library(optmatch)
-## library(lme4)
+## library(survivalist) # https://github.com/renlund/survivalist
+## library(dable) # https://github.com/renlund/dable
+## library(ggplot2); theme_set(theme_bw())
 
 ### CHUNK OPTIONS: -----------------------------------------
 opts_chunk$set(

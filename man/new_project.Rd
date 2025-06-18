@@ -7,7 +7,7 @@
 new_project(
   name = "new_project",
   path = NULL,
-  class = "ucr",
+  class = "article",
   dm = FALSE,
   RSproj = TRUE,
   git = TRUE,

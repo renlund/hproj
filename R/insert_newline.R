@@ -17,7 +17,8 @@
 ##'     cat(insert_linebreak(s, n = 7))
 ##'     cat(insert_linebreak(s, n = 100))
 ##' @export
-insert_linebreak <- function(s, n, linebreak = "\n", splitby = " ", max.it = 10000){
+insert_linebreak <- function(s, n, linebreak = "\n", splitby = " ",
+                             rm.split = TRUE, max.it = 10000){
     properties(x = s, class = c("character", "factor"))
     properties(x = n, class = "numeric", length = 1, na.ok = FALSE)
     properties(x = linebreak, class = "character", length = 1, na.ok = FALSE)
@@ -33,6 +34,11 @@ insert_linebreak <- function(s, n, linebreak = "\n", splitby = " ", max.it = 100
         return(r)
     }
     ORIGINAL <- s
+    collapser <- if(rm.split){
+                     linebreak
+                 } else {
+                     paste0(splitby, linebreak, collapse = "")
+                 }
     R <- rep(NA_character_, length(ORIGINAL))
     for(index in seq_along(s)){ ## index = 1
         s <- ORIGINAL[index]
@@ -60,7 +66,7 @@ insert_linebreak <- function(s, n, linebreak = "\n", splitby = " ", max.it = 100
                 S <- c(S, paste0(x[id:(id+i-1)], collapse = splitby))
                 id <- id + i
             }
-            paste0(S, collapse = linebreak)
+            paste0(S, collapse = collapser)
         } else {
             s
         }
@@ -72,5 +78,6 @@ if(FALSE){
     s = c("Suslf nk fsdnjk fnsdnj  sdjkfnk sjdnf",
           "asjkdb  abhasdjb jas asbh adsbh jad",
           "sd IUAHFIASHF IAH ASFK ndf ksd")
-    insert_linebreak(s, n = 12)
+    insert_linebreak(s, n = 12) |> cat("\n")
+    insert_linebreak(s, n = 12, rm.split = FALSE) |> cat("\n")
 }

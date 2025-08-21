@@ -16,32 +16,87 @@
 ##'     replaced
 ##' @param ... things passed to \code{sub_key}
 ##' @param file character; if '<file>' is used in x, this is the replacement
-##' @param chunk character; if '<chunk>' is used, this is the replacement. Note:
+##' @param chunk character; replaces '<chunk>'. Note:
 ##'     if \code{id_marker} is being called at runtime (by knitr), then the
 ##'     actual label of the current chunk will be used.
+##' @param wd character (working directory), replaces '<wd>'
+##' @param path character (file path), replaces '<path>'
+##' @param user character (username), replaces '<user>'
+##' @param time character (date+time), replacez '<time>'
 ##' @return A string of length 1
 ##' @export
-id_marker <- function(x = "Created from <path> by <user> at <time>.",
-                      ..., file = NULL, chunk = NULL){
+id_marker <- function(
+                x = "Created by <user> at <time> from chunk '<chunk>' in <path>.",
+                ...,
+                file = "PLACEHOLDER.Rnw",
+                chunk = knitr::opts_current$get("label"),
+                wd = getwd(),
+                path = file.path(wd, file),
+                user = Sys.getenv("USERNAME"),
+                time = format(Sys.time(), format = "%Y-%m-%d %H:%M")
+                ){
     dots <- list(...) ## dots <- as.list(NULL)
-    ## set default values
-    if(is.null(file)) file <- "filename-placeholder.R"
-    if(is.null(chunk)) chunk <- "chunk-placeholder"
+    ## ## set default values
+    ## if(is.null(file)) file <- "filename-placeholder.R"
+    if(is.null(chunk)) chunk <- "PLACEHOLDER"
+    ## if(is.null(wd)) wd <- getwd()
+    ## if(null(path)) path <- file.path(wd, file)
+    ## if(is.null(user)) user <- Sys.getenv("USERNAME")
+    ## if(is.null(time)) time <- format(Sys.time(), format = "%Y-%m-%d %H:%M")
     ## get run time values
-    chunk.label <- knitr::opts_current$get("label")
-    if(is.null(chunk.label)) chunk.label <- chunk
-    wd <- getwd()
-    user <- Sys.getenv("USERNAME")
-    time <- format(Sys.time(), format = "%Y-%m-%d %H:%M")
-    path <- file.path(wd, file)
-    key <- c("<user>" = user,
-             "<file>" = file,
-             "<wd>" = wd,
-             "<path>" = path,
-             "<chunk>" = chunk.label,
-             "<time>" = time)
+    key <- c(
+        "<file>" = file,
+        "<chunk>" = chunk,
+        "<wd>" = wd,
+        "<path>" = path,
+        "<user>" = user,
+        "<time>" = time
+    )
     do.call(what = "sub_key",
             args = c(list('x' = x, 'key' = key), dots))
+}
+
+##' @describeIn id_marker a standard marker
+##' @param n1 integer; max length for first part of mark text
+##' @param n2 integer; max length for second part of mark text
+##' @param newline logical; linebreak between first and second part of mark text
+##' @param linebreak character; code for linebreak
+##' @param file character; name of file
+##' @param chunk logical; want reference to a chunk? Derived from filename if NULL
+##' @export
+standard_mark <- function(n1 = 80, n2 = n1,
+                          newline = TRUE,
+                          linebreak = "\n",
+                          file = "PLACEHOLDER.Rnw",
+                          chunk = NULL){
+    if(is.null(chunk)){
+        ext <- file_name(file)$extension
+        chunk <- if(ext %in% c(".Rnw", ".rnw")) TRUE else FALSE
+    }
+    r1 <- if(chunk){
+              "Created by <user> at <time> from chunk '<chunk>' in"
+          } else {
+              "Created by <user> at <time> from"
+          }
+    t1 <- insert_linebreak(s = id_marker(x = r1, file = file),
+                           n = n1,
+                           linebreak = linebreak)
+    r2 <- file.path(getwd(), file)
+    t2 <- insert_linebreak(s = r2,
+                           n = n2,
+                           linebreak = linebreak,
+                           splitby = .Platform$file.sep,
+                           rm.split = FALSE)
+    paste0(t1, if(newline) linebreak else " ", t2)
+}
+
+if(FALSE){
+    standard_mark() |> cat("\n")
+    standard_mark(file = "Foo.R") |> cat("\n")
+    standard_mark(chunk = FALSE) |> cat("\n")
+    standard_mark(50) |> cat("\n")
+    standard_mark(50, 40, newline =TRUE) |> cat("\n")
+    standard_mark(50, 40, newline =FALSE) |> cat("\n")
 }
 
 ##' @describeIn id_marker substitute by key; the names of key will be replaced

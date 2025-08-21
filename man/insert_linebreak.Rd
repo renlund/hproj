@@ -4,7 +4,14 @@
 \alias{insert_linebreak}
 \title{add linebreaks}
 \usage{
-insert_linebreak(s, n, linebreak = "\\n", splitby = " ", max.it = 10000)
+insert_linebreak(
+  s,
+  n,
+  linebreak = "\\n",
+  splitby = " ",
+  rm.split = TRUE,
+  max.it = 10000
+)
 }
 \arguments{
 \item{s}{a character string}

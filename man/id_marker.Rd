@@ -2,13 +2,27 @@
 % Please edit documentation in R/id_marker.R
 \name{id_marker}
 \alias{id_marker}
+\alias{standard_mark}
 \alias{sub_key}
 \title{create 'id mark'}
 \usage{
 id_marker(
-  x = "Created from <path> by <user> at <time>.",
+  x = "Created by <user> at <time> from chunk '<chunk>' in <path>.",
   ...,
-  file = NULL,
+  file = "PLACEHOLDER.Rnw",
+  chunk = knitr::opts_current$get("label"),
+  wd = getwd(),
+  path = file.path(wd, file),
+  user = Sys.getenv("USERNAME"),
+  time = format(Sys.time(), format = "\%Y-\%m-\%d \%H:\%M")
+)
+
+standard_mark(
+  n1 = 80,
+  n2 = n1,
+  newline = TRUE,
+  linebreak = "\\n",
+  file = "PLACEHOLDER.Rnw",
   chunk = NULL
 )
 
@@ -20,11 +34,25 @@ replaced}
 
 \item{...}{things passed to \code{sub_key}}
 
-\item{file}{character; if '\if{html}{\out{<file>}}' is used in x, this is the replacement}
+\item{file}{character; name of file}
 
-\item{chunk}{character; if '\if{html}{\out{<chunk>}}' is used, this is the replacement. Note:
-if \code{id_marker} is being called at runtime (by knitr), then the
-actual label of the current chunk will be used.}
+\item{chunk}{logical; want reference to a chunk? Derived from filename if NULL}
+
+\item{wd}{character (working directory), replaces '\if{html}{\out{<wd>}}'}
+
+\item{path}{character (file path), replaces '\if{html}{\out{<path>}}'}
+
+\item{user}{character (username), replaces '\if{html}{\out{<user>}}'}
+
+\item{time}{character (date+time), replacez '\if{html}{\out{<time>}}'}
+
+\item{n1}{integer; max length for first part of mark text}
+
+\item{n2}{integer; max length for second part of mark text}
+
+\item{newline}{logical; linebreak between first and second part of mark text}
+
+\item{linebreak}{character; code for linebreak}
 
 \item{g}{logical; use gsub instead of sub}
 
@@ -51,6 +79,8 @@ knitr runtime)
 }
 \section{Functions}{
 \itemize{
+\item \code{standard_mark()}: a standard marker
+
 \item \code{sub_key()}: substitute by key; the names of key will be replaced
 by the values of key in x
 

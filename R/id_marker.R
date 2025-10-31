@@ -28,7 +28,7 @@
 id_marker <- function(
                 x = "Created by <user> at <time> from chunk '<chunk>' in <path>.",
                 ...,
-                file = "PLACEHOLDER.Rnw",
+                file = opts_hproj$get("source_file"),
                 chunk = knitr::opts_current$get("label"),
                 wd = getwd(),
                 path = file.path(wd, file),
@@ -37,7 +37,7 @@ id_marker <- function(
                 ){
     dots <- list(...) ## dots <- as.list(NULL)
     ## ## set default values
-    ## if(is.null(file)) file <- "filename-placeholder.R"
+    if(is.null(file)) file <- "PLACEHOLDER.Rnw"
     if(is.null(chunk)) chunk <- "PLACEHOLDER"
     ## if(is.null(wd)) wd <- getwd()
     ## if(null(path)) path <- file.path(wd, file)
@@ -67,8 +67,9 @@ id_marker <- function(
 standard_mark <- function(n1 = 80, n2 = n1,
                           newline = TRUE,
                           linebreak = "\n",
-                          file = "PLACEHOLDER.Rnw",
+                          file = opts_hproj$get("source_file"),
                           chunk = NULL){
+    if(is.null(file)) file <- "PLACEHOLDER.Rnw"
     if(is.null(chunk)){
         ext <- file_name(file)$extension
         chunk <- if(ext %in% c(".Rnw", ".rnw")) TRUE else FALSE

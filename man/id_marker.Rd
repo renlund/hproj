@@ -9,7 +9,7 @@
 id_marker(
   x = "Created by <user> at <time> from chunk '<chunk>' in <path>.",
   ...,
-  file = "PLACEHOLDER.Rnw",
+  file = opts_hproj$get("source_file"),
   chunk = knitr::opts_current$get("label"),
   wd = getwd(),
   path = file.path(wd, file),
@@ -22,7 +22,7 @@ standard_mark(
   n2 = n1,
   newline = TRUE,
   linebreak = "\\n",
-  file = "PLACEHOLDER.Rnw",
+  file = opts_hproj$get("source_file"),
   chunk = NULL
 )
 

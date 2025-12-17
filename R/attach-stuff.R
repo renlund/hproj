@@ -99,7 +99,8 @@ fig_attach <- function(cap, ext = NULL){
         if(attach & knit_runtime()) warning("the file extension may not exist")
     }
     n <- length(cap)
+    CAP <- gsub("%", "%%", cap)
     if(attach){
-        sprintf(paste0(cap, " \\attachfile{", path, "/", lab,"-%s.", ext, "}"), 1:n)
+        sprintf(paste0(CAP, " \\attachfile{", path, "/", lab,"-%s.", ext, "}"), 1:n)
     } else cap
 }

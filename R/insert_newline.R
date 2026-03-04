@@ -29,7 +29,7 @@ insert_linebreak <- function(s, n, linebreak = "\n", splitby = " ",
         r <- factor(x = as.numeric(s),
                     labels = insert_linebreak(
                         s = levels(s), n = n, linebreak = linebreak,
-                        splitby = splitby
+                        splitby = splitby, rm.split = rm.split, max.it = max.it
                     ))
         return(r)
     }
@@ -80,4 +80,8 @@ if(FALSE){
           "sd IUAHFIASHF IAH ASFK ndf ksd")
     insert_linebreak(s, n = 12) |> cat("\n")
     insert_linebreak(s, n = 12, rm.split = FALSE) |> cat("\n")
+
+    s = c("Foobarbazian-hyperfux")
+    insert_linebreak(s, n = 10, splitby = "-", rm.split = TRUE)
+    insert_linebreak(s, n = 10, splitby = "-", rm.split = FALSE)
 }

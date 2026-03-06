@@ -82,7 +82,8 @@ xlsx_attach <- function(cap, tab, file = NULL, dir = "table", ...){
 ##' @export
 fig_attach <- function(cap, ext = NULL){
     if(is.null(ext)){
-        ext <- opts_hproj$get("fig_dev")
+        ## ext <- opts_hproj$get("fig_dev")
+        ext <- knit_proc('dev')
     }
     if(knit_runtime()){
         lab <- knit_proc('label')

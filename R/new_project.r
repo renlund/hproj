@@ -39,50 +39,32 @@
 #' \item{.gitignore: a file that git uses to tell which files to ignore}
 #' }
 #'
-#' Note also that an org-file can be created (for user of org-mode), but I've
-#' realized I do not want org-files in each project - so I don't use this
-#' feature.
-#'
-#' Also, this function can setup 'checkpoint' for reproducibility.
-#' @param name name of the project
-#' @param path path to project directory (else current)
-#' @param class class of document in source file (default: 'ucr')
+#' @param name name of the project (directory)
+#' @param path path to project directory (else 'here')
 #' @param dm should a data management file be created?
 #' @param RSproj Start a RStudio project?
 #' @param git should git be initialized? (also a .gitignore file will be
 #'   created)
-#' @param checkpoint should checkpoint be used?
-#' @param checkpoint.date date for checkpoint
-#' @param go_there Set working directory to project directory? (default: FALSE)
-#' @param org should an org file be created?
 #' @export
-new_project <- function(name="new_project", path=NULL, class="article",
-                        dm = FALSE, RSproj=TRUE, git=TRUE,
-                        checkpoint = FALSE, checkpoint.date = NULL,
-                        go_there=FALSE, org = FALSE){
+new_project <- function(name = NULL, path = NULL,
+                        dm = FALSE, RSproj = TRUE, git = TRUE){
+    if(is.null(name)){
+        name <- paste0("TestProject_", paste0(c(sample(LETTERS, 3),
+                                                sample(0:9, 3)), collapse = ""))
+    }
     wd <- getwd()
-    if(is.null(checkpoint.date)){
-        checkpoint.date <- as.character(Sys.Date())
-    } else {
-        cp_date <- as.Date(checkpoint.date)
-        if(cp_date > Sys.Date()) stop("bad date")
-    }
-    if(checkpoint){
-        cat("You want to use checkpoint, right? If you are not currently\n",
-            "using the R version that you want for this project, stop and\n",
-            "run this function with the version you want (it will be much\n",
-            "easier)\n Press 'x' to abort.\n Press anything else to proceed.")
-        if(readline() == "x") return(invisible(NULL))
-    }
     install_directory <- if(is.null(path)) wd else path
-    cat(paste0("The new '", name, "' project directory structure will be created\n under directory:\n   ", install_directory, "\n Press 'x' to abort.\n Press anything else to proceed."))
+    cat(paste0("The new '", name, "' project directory structure will be ",
+               "created\n under directory:\n   ", install_directory,
+               "\n Press 'x' to abort.\n Press anything else to proceed."))
     if( readline()=="x" ) {
-        ## setwd(install_directory) ## why was this here?
         return(invisible(NULL))
     }
-    yr_name <- readline("Provide name for project/git\n (e.g. Anaximandros Janson)     ")
+    yr_name <- readline(paste0("Provide name for project/git\n",
+                               " (e.g. Anaximandros Janson)     "))
     yr_mail <-
-        readline("Provide email for project/git\n (e.g. Anaximandros.Janson@foo.bar)     ")
+        readline(paste0("Provide email for project/git\n",
+                        " (e.g. Anaximandros.Janson@foo.bar)     "))
     if(yr_name == "") yr_name <-  Sys.info()['login']
     if(yr_mail == "") yr_mail <-  paste0(Sys.info()['login'], "@mail.com")
     full.path <- file.path(install_directory, name)
@@ -107,16 +89,14 @@ new_project <- function(name="new_project", path=NULL, class="article",
     output_file <- paste0(report_name, ".pdf")
     dm_output_file <- if(dm) paste0("DM--", report_name, ".pdf") else NULL
     cat(create_rnw(name = name, yr_name = yr_name,
-                   yr_mail = yr_mail, class = class,
+                   yr_mail = yr_mail,
                    source_file = source_file,
-                   output_file = output_file, DM = FALSE,
-                   checkpoint = checkpoint),
+                   output_file = output_file, DM = FALSE),
         file=source_file)
     if(dm) cat(create_rnw(name = name, yr_name = yr_name,
-                          yr_mail = yr_mail, class = class,
+                          yr_mail = yr_mail,
                           source_file = dm_source_file,
-                          output_file = dm_output_file, DM = TRUE,
-                          checkpoint = checkpoint),
+                          output_file = dm_output_file, DM = TRUE),
                file=dm_source_file)
     cat(create_bib(), file="references.bib")
     if(RSproj) cat(create_proj(), file=paste0(report_name,".rproj"))
@@ -126,117 +106,47 @@ new_project <- function(name="new_project", path=NULL, class="article",
         paste(rep("-", 65),collapse=""), "\n"
     )
     cat(end.text)
-    cat(create_rprofile(source_file, dm_source_file, checkpoint = checkpoint,
-                        cp.date = checkpoint.date),
+    cat(create_rprofile(source_file, dm_source_file),
         file = ".Rprofile")
-    if(checkpoint){
-        cp_path <- file.path("~", ".checkpoint", checkpoint.date,
-                  "lib", R.version$platform,
-                  base::getRversion())
-        dir.create(cp_path, recursive = TRUE, showWarnings = FALSE)
-        old_lib <- .libPaths()
-        .libPaths(cp_path)
-        laddad <- function(s){
-            tryCatch(
-                expr = isNamespaceLoaded(s),
-                error = function(e) FALSE
-            )
-        }
-        hproj_loaded <- laddad("hproj")
-        knitr_loaded <- laddad("knitr")
-        devt_loaded <- laddad("devtools")
-        rmark_loaded <- laddad("rmarkdown")
-        if(hproj_loaded){
-            ## warning("hproj is loaded, will be unloaded")
-            unloadNamespace("hproj")
-        }
-        if(knitr_loaded){
-            ## warning("knitr is loaded, will be unloaded")
-            unloadNamespace("knitr")
-        }
-        if(devt_loaded){
-            ## warning("devtools is loaded, will be unloaded")
-            unloadNamespace("devtools")
-        }
-        if(rmark_loaded){
-            ## warning("rmarkdown is loaded, will be unloaded")
-            unloadNamespace("rmarkdown")
-        }
-        paket <- c("devtools", "knitr", "rmarkdown", "Hmisc", "coin", "broom", "dplyr")
-        utils::install.packages(pkgs = paket, ## lib = cp_path,
-                                repos = paste0("https://mran.microsoft.com/snapshot/",
-                                               checkpoint.date),
-                                dependencies = c("Depends", "Imports"),
-                                verbose = TRUE, type = "binary")
-        devtools::install_github("renlund/hproj", reload = FALSE, force = TRUE) ## , lib = cp_path)
-        .libPaths(old_lib)
-        ##options(repos = old_repos)
-        ## install basic packages into checkpoint
-
-    }
-    if(org) cat(create_org(name, yr_name, yr_mail),
-                file = paste0(name, "-org.org"))
     if(git) create_git(yr_name, yr_mail, source_file, dm_source_file)
-    if(go_there){
-        setwd(full.path)
-        hproj::opts_hproj$set("source_file" = source_file)
-    } else {
-        setwd(wd)
-    }
-
+    setwd(wd)
     invisible(NULL)
 }
 
 ## create_git --------------------
-
 create_git <- function(yr_name = NULL, yr_mail = NULL, source_file,
                        dm_source_file = NULL){
   cat(create_git_ignore(), file=".gitignore")
   system("git init")
   cat(paste(rep("-", 65),collapse=""), "\n")
-  if(is.null(yr_name)) yr_name <- readline("Provide name for git\n (e.g. Anaximandros Janson)     ")
+  if(is.null(yr_name)) {
+      yr_name <- readline(paste0("Provide name for git\n ",
+                                 "(e.g. Anaximandros Janson)     "))
+  }
   system(paste0("git config user.name \"",yr_name,"\""))
-  if(is.null(yr_mail)) yr_mail <- readline("Provide email for git\n (e.g. Anaximandros.Janson@foo.bar)     ")
+  if(is.null(yr_mail)){
+      yr_mail <- readline(paste0("Provide email for git\n ",
+                                 "(e.g. Anaximandros.Janson@foo.bar)     "))
+  }
   system(paste0("git config user.email ",yr_mail))
   system(paste0("git add ", source_file,
                 if(!is.null(dm_source_file)) paste0(" ", dm_source_file) else "",
                 " references.bib"))
-  system(paste0("git commit -m \"hproj initialized project ",gsub("-","",Sys.Date()),"\""))
+  system(paste0("git commit -m \"hproj initialized project ",
+                gsub("-", "", Sys.Date()), "\""))
   cat(paste(rep("-", 65),collapse=""), " Done! \n")
 }
 
-## create_org --------------------
-
-create_org <- function(name = NULL, yr_name = NULL, yr_mail = NULL){
-    paste0(
-"#+TITLE: ", name,"
-#+AUTHOR: ", yr_name, "
-#+EMAIL: ", yr_mail, "
-#+STARTUP: contents
-
-This is an org mode file, to be used with emacs. See: [[http://orgmode.org/][org mode link]].
-You might want to edit .emacs to include this file in the org-agenda-files variable.
-
-* ", name," action list
-** DONE initialize project '", name,"'
-  CLOSED: [", Sys.Date(),"]
-** TODO start working on project '", name, "'
-  SCHEDULED: <", Sys.Date()+1,">
-"
-)
-}
-
 ## REPORT TEXT ------------------
-create_rnw <- function(name, yr_name = NULL, yr_mail = NULL, class,
-                       source_file, output_file, DM = FALSE,
-                       checkpoint = FALSE){
+create_rnw <- function(name, yr_name = NULL, yr_mail = NULL,
+                       source_file, output_file, DM = FALSE){
     if(is.null(yr_name)) yr_name <- Sys.info()['login']
     if(is.null(yr_mail)) yr_mail <- paste0(Sys.info()['login'], "@mail.com")
     pre_text <- if(DM) "Data management for " else ""
    paste0(
 "%%%%%%  This file was created with ", R.version.string," and
 %%%%%%  package hproj ", utils::packageVersion('hproj')," on ",Sys.Date(),"
-\\documentclass{",class,"}
+\\documentclass{article}
 %\\usepackage[swedish, english]{babel}
 %\\usepackage[latin1]{inputenc}
 %\\newcommand{\\path}{\\texttt}
@@ -254,20 +164,14 @@ create_rnw <- function(name, yr_name = NULL, yr_mail = NULL, class,
 
 <<'", if(DM) "DM-", "SETUP', cache=FALSE, include=FALSE>>=
 ### PACKAGES: ----------------------------------------------
-", if(checkpoint) "if(FALSE){
-    library(knitr)
-    library(devtools)
-    devtools::install_github('renlund/hproj') ## , ref = ?)
-    ## get latest ref-number from:
-    ##      https://github.com/renlund/hproj/commit/master
-}\n",
-"library(knitr)
+library(knitr)
 library(hproj)       # https://github.com/renlund/hproj
 library(data.table)
 ## library(survival)
 ## library(survivalist) # https://github.com/renlund/survivalist
-## library(dable) # https://github.com/renlund/dable
+## library(dable)       # https://github.com/renlund/dable
 ## library(ggplot2); theme_set(theme_bw())
+## library(lattice)
 
 ### CHUNK OPTIONS: -----------------------------------------
 opts_chunk$set(
@@ -312,10 +216,10 @@ opts_hproj$set(
 
 @
 
-\\title{",pre_text, gsub("_","\\_", name, fixed=TRUE),
+\\title{", pre_text, gsub("_","\\_", name, fixed=TRUE),
 "\\Sexpr{opts_hproj$get('",
 if(DM) "dm_", "version_latex')}}
-\\author{",yr_name,"\\\\ \\vspace{0.2cm}\\texttt{",yr_mail,"} }
+\\author{", yr_name, "\\\\ \\vspace{0.2cm}\\texttt{", yr_mail, "} }
 
 \\begin{document}
 
@@ -352,6 +256,7 @@ create_bib <- function(){
   organization = {R Foundation for Statistical Computing},
   address = {Vienna, Austria},
   year = {", substr(as.character(Sys.Date()), 1, 4), "},
+  doi = {10.32614/R.manuals},
   note = {\\url{http://www.R-project.org/}}
 }
 
@@ -375,36 +280,6 @@ title = {{ESS}: {E}macs {S}peaks {S}tatistics},
 howpublished = {\\url{http://ess.r-project.org}},
 version = {Version 16.10-1}
 }
-
-@comment{ ******** BELOW ARE TEMPLATES FOR ARTICLES, BOOKS AND TECHNICAL REPORTS ********
-
-@article{RR83,
-  author = {Rosenbaum, P. R. and Rubin, D. B.},
-  journal = {Biometrika},
-  pages = {41--55},
-  title = {The central role of the propensity score in observational studies},
-  volume = {70},
-  year = {1983}
-}
-
-@book{,
-  author = {},
-  journal = {},
-  publisher = {},
-  title = {},
-  year = {}
- }
-
-@techreport{,
-  author = {},
-  type = {},
-  institution = {},
-  pages = {},
-  title = {},
-  number = {},
-  year = {}
-}
-}
 ")
 }
 
@@ -424,30 +299,6 @@ create_git_ignore <- function(){
 ")
 }
 
-## ## old list below worked by exclusion, new list above works more with inclusion
-## ".Rproj.user
-## *.Rhistory
-## *.RData
-## *.tex
-## *.toc
-## *.concordance
-## *.log
-## *.brf
-## *.bbl
-## *.blg
-## *.lof
-## *.lot
-## *.out
-## *.aux
-## .gitignore
-## *~
-## *.pdf
-## cache/*
-## figure/*
-## sent/*
-## table/*
-## calc/*
-## "
 
 ## PROJ TEXT ---------------------
 create_proj <- function(){
@@ -472,7 +323,7 @@ StripTrailingWhitespace: Yes
 }
 
 ## Rprofile -------------------
-create_rprofile <- function(source_file, dm_source_file, checkpoint, cp.date){
+create_rprofile <- function(source_file, dm_source_file){
     DM <- !is.null(dm_source_file)
     s_file_text <- if(DM) paste0(",\n            dm_source_file = '", dm_source_file,"'") else ""
     no_dm_text <- if(DM) "" else ",\n            dm_active = FALSE"
@@ -486,24 +337,7 @@ tmp <- paste0(rep('+', options('width')$width-3), collapse = '')
 cat(paste0('\\n ', tmp, '\\n   R started in a hproj-directory with an .rprofile file.\\n',
            '   This will set a source_file in the hproj options and also try\\n',
            '   to load the .rprofile (if it exists) in the home directory.\\n'))
-",
-if(checkpoint){
-paste0(
-"
-cat(paste0('   It will also load knitr and activate checkpoint with snapshot\\n',
-           '   date ", cp.date, "\\n'))
-
-require(checkpoint)
-.checkpoint_startup <- checkpoint::checkpoint(
-    snapshotDate = '", cp.date,"',
-    R.version = '", as.character(getRversion()), "',
-    use.knitr = TRUE,
-    scan.rnw.with.knitr = TRUE
-)
-checkpoint::setSnapshot('", cp.date,"')
-")
-} else "",
-"tryCatch(
+tryCatch(
     exp = {
         require(hproj)
         opts_hproj$set(

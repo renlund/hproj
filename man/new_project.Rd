@@ -4,25 +4,12 @@
 \alias{new_project}
 \title{create new project}
 \usage{
-new_project(
-  name = "new_project",
-  path = NULL,
-  class = "article",
-  dm = FALSE,
-  RSproj = TRUE,
-  git = TRUE,
-  checkpoint = FALSE,
-  checkpoint.date = NULL,
-  go_there = FALSE,
-  org = FALSE
-)
+new_project(name = NULL, path = NULL, dm = FALSE, RSproj = TRUE, git = TRUE)
 }
 \arguments{
-\item{name}{name of the project}
+\item{name}{name of the project (directory)}
 
-\item{path}{path to project directory (else current)}
-
-\item{class}{class of document in source file (default: 'ucr')}
+\item{path}{path to project directory (else 'here')}
 
 \item{dm}{should a data management file be created?}
 
@@ -30,14 +17,6 @@ new_project(
 
 \item{git}{should git be initialized? (also a .gitignore file will be
 created)}
-
-\item{checkpoint}{should checkpoint be used?}
-
-\item{checkpoint.date}{date for checkpoint}
-
-\item{go_there}{Set working directory to project directory? (default: FALSE)}
-
-\item{org}{should an org file be created?}
 }
 \description{
 This function sets up a project directory structure along with
@@ -81,10 +60,4 @@ be project specific}
 
 \item{.gitignore: a file that git uses to tell which files to ignore}
 }
-
-Note also that an org-file can be created (for user of org-mode), but I've
-realized I do not want org-files in each project - so I don't use this
-feature.
-
-Also, this function can setup 'checkpoint' for reproducibility.
 }

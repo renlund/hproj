@@ -13,7 +13,7 @@ run_chunk(
   file = NULL,
   dm = NULL,
   envir = .GlobalEnv,
-  verbose = TRUE
+  verbose = FALSE
 )
 
 rblock(
@@ -21,12 +21,12 @@ rblock(
   file = NULL,
   dm = NULL,
   envir = .GlobalEnv,
-  verbose = TRUE
+  verbose = FALSE
 )
 
 rblock_dm(chunk = NULL, ...)
 
-cess(chunk = NULL, file = NULL, dm = NULL, envir = .GlobalEnv, verbose = TRUE)
+cess(chunk = NULL, file = NULL, dm = NULL, envir = .GlobalEnv, verbose = FALSE)
 
 cess_dm(chunk = NULL, ...)
 }

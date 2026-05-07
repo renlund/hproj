@@ -8,7 +8,7 @@
 #'     evaluate chunks
 #' @param verbose if TRUE, may print some slightly unneccessary messages
 #' @export
-run_chunk <- function(chunk = NULL, file = NULL, dm = NULL, envir = .GlobalEnv, verbose = TRUE){
+run_chunk <- function(chunk = NULL, file = NULL, dm = NULL, envir = .GlobalEnv, verbose = FALSE){
     if(is.null(file)) file = holy_get("source_file", dm = dm)
     cinfo <- chunks_info(file, all = TRUE)
     if(is.null(chunk)) chunk <- 1

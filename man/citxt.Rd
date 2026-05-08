@@ -4,7 +4,7 @@
 \alias{citxt}
 \title{format CI}
 \usage{
-citxt(est, low, high, d = 2, space1 = TRUE, space2 = TRUE)
+citxt(est, low, high, d = 2, space1 = TRUE, space2 = TRUE, exponent = FALSE)
 }
 \arguments{
 \item{est}{estimate}
@@ -18,6 +18,8 @@ citxt(est, low, high, d = 2, space1 = TRUE, space2 = TRUE)
 \item{space1}{logical; space between 'estimate' and parenthesis}
 
 \item{space2}{logical; space between comma and 'upper bound'}
+
+\item{exponent}{logical; exponentiate the numbers?}
 }
 \description{
 Format CI as text "estimate (lower bound, upper bound)". Note to self: this

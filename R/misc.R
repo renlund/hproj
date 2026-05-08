@@ -36,17 +36,23 @@ farben <- function(p, show = FALSE){
 ##' @param d digits
 ##' @param space1 logical; space between 'estimate' and parenthesis
 ##' @param space2 logical; space between comma and 'upper bound'
+##' @param exponent logical; exponentiate the numbers?
 ##' @examples
 ##' e  = c(1,     1.501, 1.499)
 ##' lo  = c(0.899, 1.250, 1.000)
 ##' hi = c(1.455, 1.950, 2)
 ##' citxt(e, lo, hi)
 ##' @export
-citxt <- function(est, low, high, d = 2, space1 = TRUE, space2 = TRUE){
+citxt <- function(est, low, high, d = 2, space1 = TRUE, space2 = TRUE,
+                  exponent = FALSE){
     s <- paste0("%.", d, "f", if(space1) " " else "",
                 "(%.", d, "f,", if(space2) " " else "",
                 "%.", d, "f)")
-    sprintf(s, est, low, high)
+    if(exponent){
+        sprintf(s, exp(est), exp(low), exp(high))
+    } else {
+        sprintf(s, est, low, high)
+    }
 }
 
 

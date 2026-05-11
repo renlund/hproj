@@ -158,7 +158,8 @@ create_rnw <- function(name, yr_name = NULL, yr_mail = NULL,
 % \\usepackage[table]{xcolor}
 \\usepackage{attachfile}
 \\usepackage{subfig}
-\\usepackage{lscape}
+\\usepackage{pdflscape}
+\\usepackage{pdfpages}
 \\usepackage{longtable}
 \\DeclareGraphicsExtensions{.pdf, .eps, .png, .jpg, .jpeg}
 

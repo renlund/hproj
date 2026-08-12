@@ -32,26 +32,30 @@ fetch_object <- function(name = NULL, overwrite=FALSE, message=FALSE,
     }
     Lext <- list.files('calc', pattern=types, all.files=TRUE, ignore.case = TRUE)
     L <- gsub(types, "", Lext)
-    if(length(Lext)==0) stop("there are no saves whatsoever")
-    for(K in name){
-        if(K %in% L){
-            dummy <- if(exists(K, envir=env)) 1 else 0
-            place <- which(L==K)
-            if(dummy==1){
-                if(overwrite) {
-                    load(file=file.path('calc', Lext[place]), envir=env)
-                    if(message) message(paste0("'", K, "' was overwritten."))
+    if(length(Lext)==0){
+        message("there are no saves whatsoever")
+    } else {
+        for(K in name){
+            if(K %in% L){
+                dummy <- if(exists(K, envir=env)) 1 else 0
+                place <- which(L==K)
+                if(dummy==1){
+                    if(overwrite) {
+                        load(file=file.path('calc', Lext[place]), envir=env)
+                        if(message) message(paste0("'", K, "' was overwritten."))
+                    } else {
+                        if(message) message(paste0("'", K, "' exists and was not overwritten."))
+                    }
                 } else {
-                    if(message) message(paste0("'", K, "' exists and was not overwritten."))
+                    load(file=file.path('calc', Lext[place]), envir=env)
+                    if(message) message(paste0("'",K,"' dit not exist and was loaded."))
                 }
             } else {
-                load(file=file.path('calc', Lext[place]), envir=env)
-                if(message) message(paste0("'",K,"' dit not exist and was loaded."))
+                warning(paste0("'", K, "' does not exists in directory 'calc'."))
             }
-        } else {
-         warning(paste0("'", K, "' does not exists in directory 'calc'."))
         }
     }
+    invisible(NULL)
 }
 
 ##' @describeIn fetch a shorthand for loading all variables with variable names

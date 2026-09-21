@@ -4,7 +4,16 @@
 \alias{citxt}
 \title{format CI}
 \usage{
-citxt(est, low, high, d = 2, space1 = TRUE, space2 = TRUE, exponent = FALSE)
+citxt(
+  est,
+  low,
+  high,
+  d = 2,
+  between = "-",
+  space1 = TRUE,
+  space2 = TRUE,
+  exponent = FALSE
+)
 }
 \arguments{
 \item{est}{estimate}

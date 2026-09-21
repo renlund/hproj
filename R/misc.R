@@ -43,10 +43,10 @@ farben <- function(p, show = FALSE){
 ##' hi = c(1.455, 1.950, 2)
 ##' citxt(e, lo, hi)
 ##' @export
-citxt <- function(est, low, high, d = 2, space1 = TRUE, space2 = TRUE,
+citxt <- function(est, low, high, d = 2, between = "-", space1 = TRUE, space2 = TRUE,
                   exponent = FALSE){
     s <- paste0("%.", d, "f", if(space1) " " else "",
-                "(%.", d, "f,", if(space2) " " else "",
+                "(%.", d, "f", if(space2) " " else "", between, if(space2) " " else "",
                 "%.", d, "f)")
     if(exponent){
         sprintf(s, exp(est), exp(low), exp(high))

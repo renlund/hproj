@@ -6,7 +6,7 @@
 ##' @return character vector of color codes; possible a plot as a side effect
 ##' @export
 farben <- function(p, show = FALSE){
-    ps <- c("ucr", "nejm")
+    ps <- c("ucr", "nejm", "lattice")
     if( !(p %in% ps) ){
         s <- paste0("p should be one of {", paste(ps, collapse = ", "), "}")
         stop(s)
@@ -17,6 +17,10 @@ farben <- function(p, show = FALSE){
     if(p == "nejm"){
         r <- c("#BC3C29FF", "#0072B5FF", "#E18727FF", "#20854EFF",
                "#7876B1FF", "#6F99ADFF", "#FFDC91FF", "#EE4C97FF")
+    }
+    if(p == "lattice"){
+        r <- c("#0072B2", "#E69F00", "#009E73", "#D55E00",
+               "#56B4E9", "#F0E442", "#CC79A7")
     }
     if (show) {
         grDevices::dev.new()

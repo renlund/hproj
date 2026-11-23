@@ -4,16 +4,19 @@
 \alias{equal_nchar}
 \title{elements of uniformal 'nchar' length}
 \usage{
-equal_nchar(x, n = NULL, fill = " ", right = FALSE)
+equal_nchar(x, n = NULL, fill = " ", right = FALSE, trunc.right = TRUE)
 }
 \arguments{
 \item{x}{vector to fix}
 
-\item{n}{uniformal nchar length for elements of x}
+\item{n}{interger; uniformal nchar length for elements of x}
 
 \item{fill}{character to fill the void}
 
-\item{right}{fill to the right?}
+\item{right}{logical; fill to the right?}
+
+\item{trunc.right}{logical; if n is less than the maximum character length in x, do
+you want truncation from the right?}
 }
 \value{
 character string
@@ -22,8 +25,10 @@ character string
 make nchar have the same value for all elements of x
 }
 \examples{
-equal_nchar(x = c("A", "ABC"))
-equal_nchar(x = c("A", "ABC"), 2, fill = "_")
-equal_nchar(x = c("A", "ABC"), fill = ".", right = FALSE)
 equal_nchar(8:12, fill = "0")
+equal_nchar(x = c("A", "ABC"))
+equal_nchar(x = c("A", "ABC"), n = 4, fill = "_")
+equal_nchar(x = c("A", "ABC"), fill = ".", right = TRUE)
+equal_nchar(x = c("A", "ABC"), n = 2)
+equal_nchar(x = c("A", "ABC"), n = 2, trunc.right = FALSE)
 }
